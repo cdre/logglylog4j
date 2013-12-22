@@ -28,6 +28,8 @@ public class LogglyAppender extends AppenderSkeleton {
 
     private int batchSize = 50;
 
+    private String logglyTags;
+
     private String proxyHost = null;
 
     private int proxyPort = -1;
@@ -243,6 +245,9 @@ public class LogglyAppender extends AppenderSkeleton {
             conn.setUseCaches(false);
             // conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.setRequestProperty("Content-Type", "text/plain");
+            if (logglyTags != null) {
+                conn.setRequestProperty("X-LOGGLY-TAG", logglyTags);
+            }
             OutputStream os = conn.getOutputStream();
 
             for (Entry message : messages) {
@@ -359,6 +364,14 @@ public class LogglyAppender extends AppenderSkeleton {
      */
     public void setBatchSize(int batchSize) {
         this.batchSize = batchSize;
+    }
+
+    /**
+     * @param logglyTags
+     *            the logglyTags to set
+     */
+    public void setLogglyTags(String logglyTags) {
+        this.logglyTags = logglyTags;
     }
 
 }
