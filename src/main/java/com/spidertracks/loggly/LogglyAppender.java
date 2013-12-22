@@ -179,7 +179,9 @@ public class LogglyAppender extends AppenderSkeleton {
                     messages = db.getNext(batchSize);
                     
                 }
-                
+
+                curState = ThreadState.STOPPED;
+
                 LogLog.debug("Loggly background thread is stopped.");
             } else {
                 LogLog.warn("Loggly bailing out because we were interrupted while waiting to initialize");
@@ -292,6 +294,7 @@ public class LogglyAppender extends AppenderSkeleton {
          */
 
         public void stop() {
+
             LogLog.debug("Stopping background thread");
             requestedState = ThreadState.STOPPED;
             
