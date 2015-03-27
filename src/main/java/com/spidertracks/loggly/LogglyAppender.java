@@ -104,6 +104,7 @@ public class LogglyAppender extends AppenderSkeleton {
     private enum ThreadState { START, RUNNING, STOP_REQUESTED, STOPPED };
 
     private class HttpPost implements Runnable {
+        private final static int MAX_MSG_SIZE = 5120000;
 
         // State variables needs to be volatile, otherwise it can be cached local to the thread and stop() will never work
         volatile ThreadState curState = ThreadState.START;
@@ -252,7 +253,7 @@ public class LogglyAppender extends AppenderSkeleton {
 
             for (Entry message : messages) {
                 final byte[] msgBytes = message.getMessage().getBytes();
-                if (msgBytes.length < 5200) {
+                if (msgBytes.length < MAX_MSG_SIZE) {
                     conn.getOutputStream().write(msgBytes);
                 } else {
                     LogLog.warn("message to large for loggly - dropping msg:\n" + msgBytes);
