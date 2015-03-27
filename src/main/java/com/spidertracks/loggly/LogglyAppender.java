@@ -252,7 +252,11 @@ public class LogglyAppender extends AppenderSkeleton {
 
             for (Entry message : messages) {
                 final byte[] msgBytes = message.getMessage().getBytes();
-                conn.getOutputStream().write(msgBytes);
+                if (msgBytes.length < 5200) {
+                    conn.getOutputStream().write(msgBytes);
+                } else {
+                    LogLog.warn("message to large for loggly - dropping msg:\n" + msgBytes);
+                }
             }
 
             os.flush();
