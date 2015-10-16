@@ -163,6 +163,7 @@ public class LogglyAppender extends AppenderSkeleton {
                             }
                             default: {
                                 LogLog.error("Received error code " + response + " from Loggly servers.");
+                                db.deleteEntries(messages);
                             }
                             }
                         } catch (IOException e) {
