@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.spidertracks</groupId>
   <artifactId>loggly</artifactId>
-  <version>0.0.4-RUMBLE</version>
+  <version>0.0.5-RUMBLE</version>
   <name>Loggly asynchronous http logger</name>
   <description>Logs log4j message asynchronously to loggly via the http input.</description>
 
@@ -43,7 +43,7 @@
     <dependency>
     	<groupId>org.hsqldb</groupId>
     	<artifactId>hsqldb</artifactId>
-    	<version>2.0.0</version>
+    	<version>2.4.0</version>
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>
